@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Runs hadoop
+# Run this from the master
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+conf=`cd "$bin/../conf/hadoo/hadoo/hadoop"; pwd`
+
+TEST='/home/tbr440/cgc2/test/'
+export HADOOP_HOME='/home/tbr440/cgc2/hadoop/'
+export HADOOF_CONF_DIR=$conf
+
+"$bin/writeconf.sh"
+$HADOOP_HOME/bin/hdfs --config "$conf" namenode -format
+$HADOOP_HOME/bin/start-dfs.sh
+$HADOOP_HOME/bin/start-mapred.sh
+$HADOOP_HOME/bin/hadoop --config "$conf" fs -put "$TEST/input" input
+$HADOOP_HOME/bin/hadoop --config "$conf" jar $HADOOP_HOME/hadoop-*-examples-0.21.0.jar grep input output 'dfs[a-z.]+'
+$HADOOP_HOME/bin/hadoop --config "$conf" fs -get output "$TEST/output"
+$HADOOP_HOME/bin/stop-all.sh
