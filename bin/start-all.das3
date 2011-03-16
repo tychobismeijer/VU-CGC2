@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Runs hadoop
+# Run this from the master
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+test='/home/tbr440/cgc2/test/'
+
+export JAVA_HOME='/usr/local/package/jdk1.6.0_17-linux-amd64'
+export HADOOP_HOME='/home/tbr440/cgc2/hadoop'
+export HADOOP_CONF_DIR='/home/tbr440/cgc2/run/conf/hadoop'
+export HADOOP_HDFS_HOME="${HADOOP_HOME}"
+
+
+echo "### Writing Configuration ###"
+"$bin/writeconf.sh"
+echo "### Formatting HDFS ###"
+"$bin/hdfs" namenode -format
+echo "### Starting HDFS ###"
+"$bin/start-dfs.sh"
+echo "### Starting Mapreduce ###"
+"$bin/start-mapred.sh"
+
+echo "### Copying input to HDFS ###"
+"$bin/hadoop"  fs -put "$test/input" input
+echo "### Starting Task ###"
+"$bin/hadoop" jar $HADOOP_HOME/hadoop-*-examples-0.21.0.jar grep input output 'dfs[a-z.]+'
+echo "### Copying output from HDFS ###"
+rm -r "$test/output"
+"$bin/hadoop" fs -get output "$test/output"
+echo "### Stopping ###"
+"$bin/stop-mapred.sh"
+"$bin/stop-dfs.sh"

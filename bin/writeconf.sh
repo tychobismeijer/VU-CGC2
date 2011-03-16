@@ -5,10 +5,12 @@
 
 bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
-conf=`cd "$bin"/../conf; pwd`
+conf="/home/tbr440/cgc2/run/conf/hadoop"
 
+cat > "${conf}/core-site.xml" <<END
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
-cat > "$conf/hadoop/core-site.xml" <<END
 <configuration>
      <property>
          <name>fs.default.name</name>
@@ -17,11 +19,9 @@ cat > "$conf/hadoop/core-site.xml" <<END
 </configuration>
 END
 
-cat > "$conf/hadoop/mapred-site.xml" <<END
+cat > "${conf}/mapred-site.xml" <<END
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-
-<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
      <property>
@@ -29,4 +29,12 @@ cat > "$conf/hadoop/mapred-site.xml" <<END
          <value>$HOSTNAME:9001</value>
      </property>
 </configuration>
+END
+
+cat > "${conf}/slaves" <<END
+$HOSTNAME
+END
+
+cat > "${conf}/masters" <<END
+$HOSTNAME
 END
