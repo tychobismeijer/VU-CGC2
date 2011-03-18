@@ -1,0 +1,21 @@
+#!/bin/bash
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin"/hadoop-config.sh
+
+function print_usage() {
+  echo "Usage: start-all number-of-slaves"
+}
+
+if [ $# = 0 ]; then
+  print_usage
+  exit
+fi
+
+n_slaves="$1"
+
+for n in `seq $n_slaves`; do
+    prun -1 "$bin/slave.das3" 1 &
+done

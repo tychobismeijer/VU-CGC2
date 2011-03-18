@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Starts the daemons on a slave.
+# Run this on a slave node.
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin"/hadoop-config.sh
+
+"$bin"/hadoop-daemon.sh --block --script "$bin"/hdfs start datanode &
+"$bin"/hadoop-daemon.sh --block --script "$bin"/mapred start tasktracker &
+
+echo "$HOSTNAME" >> $HADOOP_RUN_DIR/slaves
+
+wait

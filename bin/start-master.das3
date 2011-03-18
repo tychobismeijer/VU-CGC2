@@ -1,0 +1,12 @@
+#!/bin/bash
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin/hadoop-config.sh"
+
+echo "### Starting Namenodes (HDFS) ###"
+"$bin"/hadoop-daemon.sh --script "$bin"/hdfs start namenode
+"$bin"/hadoop-daemon.sh --script "$bin"/hdfs start secondarynamenode
+echo "### Starting Jobtracker (Mapreduce) ###"
+"$bin"/hadoop-daemon.sh --script "$bin"/mapred start jobtracker
