@@ -21,8 +21,8 @@
 bin=`dirname "${BASH_SOURCE-$0}"`
 bin=`cd "$bin"; pwd`
 
-. "$bin"/hdfs-config.sh
+. "$bin"/hadoop-config.sh
 
 "$bin"/hadoop-daemon.sh --script "$bin"/hdfs stop namenode
 "$bin"/hadoop-daemons.sh --script "$bin"/hdfs stop datanode
-"$bin"/hadoop-daemons.sh --hosts masters --script "$bin"/hdfs stop secondarynamenode
+"$bin"/hadoop-daemon.sh --script "$bin"/hdfs stop secondarynamenode

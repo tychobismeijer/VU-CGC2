@@ -7,20 +7,35 @@ bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 test='/home/tbr440/cgc2/test/'
 
+
+function print_usage(){
+  echo "Usage: start-all number-of-slaves"
+}
+
+if [ $# = 0 ]; then
+  print_usage
+  exit
+fi
+
+n_slaves=$1
+echo $n_slaves
+
 export JAVA_HOME='/usr/local/package/jdk1.6.0_17-linux-amd64'
 export HADOOP_HOME='/home/tbr440/cgc2/hadoop'
 export HADOOP_CONF_DIR='/home/tbr440/cgc2/run/conf/hadoop'
 export HADOOP_HDFS_HOME="${HADOOP_HOME}"
 
 
+echo "### Deleting old stuff ###"
+rm -r /tmp/hadoop-tbr440/
 echo "### Writing Configuration ###"
 "$bin/writeconf.sh"
 echo "### Formatting HDFS ###"
 "$bin/hdfs" namenode -format
-echo "### Starting HDFS ###"
-"$bin/start-dfs.sh"
-echo "### Starting Mapreduce ###"
-"$bin/start-mapred.sh"
+echo "### Starting master ###"
+"$bin/start-master.das3"
+echo "### Starting slaves ###"
+"$bin/start-slaves.das3" $n_slaves
 
 echo "### Copying input to HDFS ###"
 "$bin/hadoop"  fs -put "$test/input" input
@@ -32,3 +47,5 @@ rm -r "$test/output"
 echo "### Stopping ###"
 "$bin/stop-mapred.sh"
 "$bin/stop-dfs.sh"
+echo "### Cleaning up ###"
+rm -r /tmp/hadoop-tbr440/

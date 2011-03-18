@@ -21,7 +21,7 @@
 bin=`dirname "${BASH_SOURCE-$0}"`
 bin=`cd "$bin"; pwd`
 
-. "$bin"/mapred-config.sh
+. "$bin"/hadoop-config.sh
 
 "$bin"/hadoop-daemon.sh --script "$bin"/mapred stop jobtracker
 "$bin"/hadoop-daemons.sh --script "$bin"/mapred stop tasktracker

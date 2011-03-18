@@ -6,6 +6,7 @@
 bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 conf="/home/tbr440/cgc2/run/conf/hadoop"
+run="/home/tbr440/cgc2/run/hadoop/"
 
 cat > "${conf}/core-site.xml" <<END
 <?xml version="1.0"?>
@@ -31,10 +32,10 @@ cat > "${conf}/mapred-site.xml" <<END
 </configuration>
 END
 
-cat > "${conf}/slaves" <<END
+cat > "${run}/slaves" <<END
 $HOSTNAME
 END
 
-cat > "${conf}/masters" <<END
+cat > "${run}/masters" <<END
 $HOSTNAME
 END

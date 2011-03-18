@@ -21,6 +21,7 @@
 
 export HADOOP_HOME='/home/tbr440/cgc2/hadoop'
 export HADOOP_CONF_DIR='/home/tbr440/cgc2/run/conf/hadoop'
+export HADOOP_RUN_DIR='/home/tbr440/cgc2/run/hadoop'
 export HADOOP_HDFS_HOME="${HADOOP_HOME}"
 export HADOOP_COMMON_HOME="${HADOOP_HOME}"
 export HADOOP_MAPRED_HOME="${HADOOP_HOME}"

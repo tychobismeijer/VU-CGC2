@@ -18,7 +18,7 @@
 bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 
-. "$bin"/hdfs-config.sh
+. "$bin"/hadoop-config.sh
 
 function print_usage(){
   echo "Usage: hdfs COMMAND"
