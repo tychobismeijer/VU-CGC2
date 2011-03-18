@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Starts the daemons on the master.
+# Run this on the master.
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin"/hadoop-config.sh
+
+echo "### Deleting old stuff ###"
+rm -r /tmp/hadoop-tbr440/
+echo "### Writing Configuration ###"
+"$bin/writeconf.sh"
+echo "### Formatting HDFS ###"
+"$bin/hdfs" namenode -format
+echo "### Starting Namenodes (HDFS) ###"
+"$bin"/hadoop-daemon.sh -block --script "$bin"/hdfs start namenode &
+"$bin"/hadoop-daemon.sh --block --script "$bin"/hdfs start secondarynamenode &
+echo "### Starting Jobtracker (Mapreduce) ###"
+"$bin"/hadoop-daemon.sh --block --script "$bin"/mapred start jobtracker &
+
+echo "$HOSTNAME" >> $HADOOP_RUN_DIR/master
+ 
+wait
+echo "### Cleaning up ###"
+rm -r /tmp/hadoop-tbr440/

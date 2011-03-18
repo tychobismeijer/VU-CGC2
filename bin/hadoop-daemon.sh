@@ -34,7 +34,7 @@ echo "## $* ##"
 
 # if no args specified, show usage
 if [ $# -le 1 ]; then
-  echo $usage
+  echo "no-args"$usage
   exit 1
 fi
 
@@ -43,11 +43,9 @@ bin=`cd "$bin"; pwd`
 
 . "$bin"/hadoop-config.sh
 
-# get arguments
 
 block=false
-if [ "--block" = "$1" ]
-  then
+if [ "--block" = "$1" ]; then
     shift
     block=true
 fi
@@ -153,7 +151,7 @@ case $startStop in
     ;;
 
   (*)
-    echo $usage
+    echo "no start/stop but but $startStop, " $usage
     exit 1
     ;;
 

@@ -16,12 +16,12 @@
 # limitations under the License.
 
 
-# Stop hadoop map reduce daemons.  Run this on master node.
+# Stop hadoop map reduce daemons.  Run this on control node.
 
 bin=`dirname "${BASH_SOURCE-$0}"`
 bin=`cd "$bin"; pwd`
 
 . "$bin"/hadoop-config.sh
 
-"$bin"/hadoop-daemon.sh --script "$bin"/mapred stop jobtracker
+"$bin"/hadoop-daemons.sh --hosts "$HADOOP_RUN_DIR/master" --script "$bin"/mapred stop jobtracker
 "$bin"/hadoop-daemons.sh --script "$bin"/mapred stop tasktracker

@@ -65,7 +65,7 @@ for slave in `cat "$HOSTLIST"|sed  "s/#.*$//;/^$/d"`; do
       sleep $HADOOP_SLAVE_SLEEP
     fi
   else
-    echo "Slave $slave is not reserved"
+    echo "Node $slave is not reserved"
   fi
 done
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Starts the slaves
+# Run this from the control machine
+
 bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 

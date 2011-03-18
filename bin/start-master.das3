@@ -1,12 +1,16 @@
 #!/bin/bash
 
+# Starts the master
+# Run this from the control machine
+
 bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 
 . "$bin/hadoop-config.sh"
 
-echo "### Starting Namenodes (HDFS) ###"
-"$bin"/hadoop-daemon.sh --script "$bin"/hdfs start namenode
-"$bin"/hadoop-daemon.sh --script "$bin"/hdfs start secondarynamenode
-echo "### Starting Jobtracker (Mapreduce) ###"
-"$bin"/hadoop-daemon.sh --script "$bin"/mapred start jobtracker
+rm "$HADOOP_RUN_DIR"/master
+prun "$bin/master.das3" 1 &
+while [ ! -e "$HADOOP_RUN_DIR"/master ]; do
+    sleep 3;
+    echo "Waiting for master to start up..."
+done 

@@ -23,6 +23,6 @@ bin=`cd "$bin"; pwd`
 
 . "$bin"/hadoop-config.sh
 
-"$bin"/hadoop-daemon.sh --script "$bin"/hdfs stop namenode
+"$bin"/hadoop-daemons.sh --hosts "$HADOOP_RUN_DIR/master" --script "$bin"/hdfs stop namenode
 "$bin"/hadoop-daemons.sh --script "$bin"/hdfs stop datanode
-"$bin"/hadoop-daemon.sh --script "$bin"/hdfs stop secondarynamenode
+"$bin"/hadoop-daemons.sh --hosts "$HADOOP_RUN_DIR/master" --script "$bin"/hdfs stop secondarynamenode

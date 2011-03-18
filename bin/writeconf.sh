@@ -31,11 +31,3 @@ cat > "${conf}/mapred-site.xml" <<END
      </property>
 </configuration>
 END
-
-cat > "${run}/slaves" <<END
-$HOSTNAME
-END
-
-cat > "${run}/masters" <<END
-$HOSTNAME
-END

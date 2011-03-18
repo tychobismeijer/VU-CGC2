@@ -52,7 +52,7 @@ then
         shift
         slavesfile=$1
         shift
-        export HADOOP_SLAVES="${HADOOP_CONF_DIR}/$slavesfile"
+        export HADOOP_SLAVES="$slavesfile"
     fi
 fi
 
