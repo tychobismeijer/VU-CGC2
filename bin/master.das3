@@ -15,7 +15,7 @@ echo "### Writing Configuration ###"
 echo "### Formatting HDFS ###"
 "$bin/hdfs" namenode -format
 echo "### Starting Namenodes (HDFS) ###"
-"$bin"/hadoop-daemon.sh -block --script "$bin"/hdfs start namenode &
+"$bin"/hadoop-daemon.sh --block --script "$bin"/hdfs start namenode &
 "$bin"/hadoop-daemon.sh --block --script "$bin"/hdfs start secondarynamenode &
 echo "### Starting Jobtracker (Mapreduce) ###"
 "$bin"/hadoop-daemon.sh --block --script "$bin"/mapred start jobtracker &

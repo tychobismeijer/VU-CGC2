@@ -11,6 +11,6 @@ bin=`cd "$bin"; pwd`
 rm "$HADOOP_RUN_DIR"/master
 prun "$bin/master.das3" 1 &
 while [ ! -e "$HADOOP_RUN_DIR"/master ]; do
-    sleep 3;
     echo "Waiting for master to start up..."
+    sleep 3;
 done 

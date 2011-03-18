@@ -25,6 +25,7 @@ export HADOOP_RUN_DIR='/home/tbr440/cgc2/run/hadoop'
 export HADOOP_HDFS_HOME="${HADOOP_HOME}"
 export HADOOP_COMMON_HOME="${HADOOP_HOME}"
 export HADOOP_MAPRED_HOME="${HADOOP_HOME}"
+export JAVA_HOME="/usr/local/package/jdk1.6.0_17-linux-amd64"
 
 this="${BASH_SOURCE-$0}"
 while [ -h "$this" ]; do

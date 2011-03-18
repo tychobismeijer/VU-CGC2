@@ -29,5 +29,9 @@ cat > "${conf}/mapred-site.xml" <<END
          <name>mapreduce.tracker.adress</name>
          <value>$HOSTNAME:9001</value>
      </property>
+     <property>
+         <name>mapred.job.tracker</name>
+         <value>$HOSTNAME:9001</value>
+     </property>
 </configuration>
 END
