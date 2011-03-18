@@ -22,3 +22,8 @@ n_slaves="$1"
 for n in `seq $n_slaves`; do
     prun -1 "$bin/slave.das3" 1 &
 done
+
+while (( `wc -l < $HADOOP_RUN_DIR/slaves` < $n_slaves )); do
+    echo "Waiting for slaves. `wc -l < $HADOOP_RUN_DIR/slaves` of $n_slaves are already up."
+    sleep 3
+done

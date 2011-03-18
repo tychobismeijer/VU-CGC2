@@ -7,6 +7,7 @@ bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 test='/home/tbr440/cgc2/test/'
 
+. "$bin/hadoop-config.sh"
 
 function print_usage(){
   echo "Usage: start-all number-of-slaves"
@@ -19,8 +20,12 @@ fi
 
 n_slaves=$1
 
+rm "$HADOOP_RUN_DIR/master"
+rm "$HADOOP_RUN_DIR/slaves"
+touch "$HADOOP_RUN_DIR/slaves"
+
+echo "### Starting master ###"
 "$bin/start-master.das3"
-sleep 5;
 echo "### Starting slaves ###"
 "$bin/start-slaves.das3" $n_slaves
 echo "### Copying input to HDFS ###"
